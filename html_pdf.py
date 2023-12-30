@@ -2,6 +2,24 @@
 from os import listdir
 from os.path import isfile, join
 import os
+from ironpdf import *
+
+
+def html2pdf(filepath):
+    """
+    Преобразует файл html в формат pdf и сохраняет его
+    :return:
+    """
+    # Считать данные этого файла
+    with open(filepath, 'r', encoding='utf-8') as f:
+        html = f.read()
+
+    # Считать имя файла до .html
+    name, extension = os.path.splitext(filepath)
+    # Сконвертировать в PDF
+    renderer = ChromePdfRenderer()
+    pdf = renderer.RenderHtmlAsPdf(html)
+    pdf.SaveAs(f"{name}.pdf")
 
 # Считать все файлы из заданной директории (учебника)
 mypath = 'data/6_klass/russkiy/ladyzhenskaya-fgos-2023-465'
@@ -12,15 +30,13 @@ for html_file in html_files:
     # Считать расширение файла (после точки)
     # Считать имя файла до .html
     name, extension = os.path.splitext(html_file)
-    print(name, extension)
 
     # Сохраняем каждый html в pdf с аналогичным именем
-    html2pdf(p1, p2..)
+    filepath = mypath + '/' + html_file
+    if extension == '.html':
+        print(filepath)
+        html2pdf(filepath)
 
-def html2pdf(параметры):
-    """
-    Преобразует файл html в формат pdf и сохраняет его
-    :return:
-    """
-    # Вывод содержимого файла print
 
+
+#html2pdf('data/6_klass/russkiy/ladyzhenskaya-fgos-2023-465/1.html')
